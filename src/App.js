@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import Game from "./Pages/Game";
+import { useState } from "react";
+import EndGame from "./Pages/EndGame";
 
 function App() {
+  const [player, setPlayer] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage setPlayer={setPlayer} />} />
+        <Route
+          path="/game"
+          element={<Game player={player} setPlayer={setPlayer} />}
+        />
+        <Route
+          path="/end"
+          element={<EndGame player={player} setPlayer={setPlayer} />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
